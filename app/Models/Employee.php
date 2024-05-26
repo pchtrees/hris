@@ -14,7 +14,6 @@ class Employee extends Model
         'fname', 
         'mname', 
         'lname', 
-        'agency_employee_no',
         'extension', // optional (Jr., Sr.)
         'dob', // Date of Birth
         'place_of_birth', // Place of Birth

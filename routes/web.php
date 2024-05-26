@@ -10,7 +10,6 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PdsController;
 
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,20 +21,9 @@ use App\Http\Controllers\PdsController;
 |
 */
 
-/*
-index - show all 
-show - show one 
-create - show form to create  new 
-store - store new 
-edit - show form to edit one 
-update - save new data of edited 
-destroy - delete one 
-*/
-
 Route::get('/', function () {
     return redirect()->route('login');
 })->name('home');
-
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('user', [UserController::class, 'index'])->name('user.home');

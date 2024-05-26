@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Employee;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class EmployeeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return Inertia::render('User/Employee/Index', [ 
@@ -24,10 +20,6 @@ class EmployeeController extends Controller
     {
         //
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         //
@@ -41,15 +33,6 @@ class EmployeeController extends Controller
         return Inertia::render('User/Employee/Show', [
             'employee' => Employee::find($id)
         ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.

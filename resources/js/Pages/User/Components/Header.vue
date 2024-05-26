@@ -1,69 +1,59 @@
 <template>
-    <header class="bg-white">
-      <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
-        <div class="flex lg:flex-1">
-          <a href="#" class="-m-1.5 p-1.5">
-            <span class="sr-only">Your Company</span>
-            <ApplicationLogo />
+  <div class="relative isolate px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+      <div class="text-center">
+        <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl mb-8">Welcome {{ $page.props.auth.user.name }}</h1> 
+        <div class="flex items-center justify-center gap-x-6 mb-4"> 
+          <div class="h-0.5 w-16 bg-blue-900"></div>
+          <h2 class="text-lg font-semibold text-blue-900">Daily Quotes</h2>
+          <div class="h-0.5 w-16 bg-blue-900"></div>
+        </div>
+        <p class="mt-6 text-lg leading-8 text-gray-600">{{ currentQuote }}</p> 
+        <div class="mt-10 flex items-center justify-center gap-x-6">
+          <a :href="route('user.attendance')"
+            class="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-lg hover:shadow-xl hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition duration-300 ease-in-out transform hover:scale-105">
+            Log Attendance <span aria-hidden="true">→</span>
           </a>
-        </div>
-        <div class="flex lg:hidden">
-          <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700" @click="mobileMenuOpen = true">
-            <span class="sr-only">Open main menu</span>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-            </svg>
-          </button>
-        </div>
-                                                </div>
+          </div>    
 
-                                                <template v-for="team in $page.props.auth.user.all_teams" :key="team.id">
-                                                    <form @submit.prevent="switchToTeam(team)">
-                                                        <DropdownLink as="button">
-                                                            <div class="flex items-center">
-                                                                <svg v-if="team.id == $page.props.auth.user.current_team_id" class="me-2 h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                                </svg>
-
-                                                                <div>{{ team.name }}</div>
-                                                            </div>
+      </div>
+    </div>
   </div>
 </template>
 
 
 
-                                                <svg class="ms-2 -me-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                                                </svg>
-                                            </button>
-                                        </span>
-                                    </template>
+<script setup>
+import { ref, onMounted } from 'vue';
 
 
+const quotes = ref([]);
 
-  <script setup>
-  import { ref } from 'vue';
-  import { Head, Link, router } from '@inertiajs/vue3';
-  import Dropdown from '@/Components/Dropdown.vue';
-  import DropdownLink from '@/Components/DropdownLink.vue';
-  import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-  
-
-  defineProps({
-      title: String,
-  });
-
-  const switchToTeam = (team) => {
-    router.put(route('current-team.update'), {
-        team_id: team.id,
-    }, {
-        preserveState: false,
-    });
+const fetchQuotes = async () => {
+  try {
+    const response = await fetch('https://api.quotable.io/random');
+    if (!response.ok) {
+      throw new Error('Failed to fetch quotes');
+    }
+    const data = await response.json();
+    quotes.value = [data.content]; // assuming API response contains quote in 'content' field
+  } catch (error) {
+    console.error(error);
+    quotes.value = ["Failed to fetch quotes"]; // handle error gracefully
+  }
 };
-  
-  const logout = () => {
-      router.post(route('logout'));
-  };
-  
+
+const currentQuote = ref("");
+
+const generateQuote = () => {
+  const randomIndex = Math.floor(Math.random() * quotes.value.length);
+  currentQuote.value = quotes.value[randomIndex];
+};
+
+onMounted(async () => {
+  await fetchQuotes();
+  generateQuote();
+});
+
 { quotes, currentQuote, generateQuote };
-</script>  
+</script>

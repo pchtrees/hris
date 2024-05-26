@@ -11,6 +11,7 @@ class Employee extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'fname', 
         'mname', 
         'lname', 
@@ -27,6 +28,7 @@ class Employee extends Model
         'philhealth_id_no', 
         'sss_no', 
         'tin_no', 
+        'agency_employee_no',
         'citizenship', 
         'dual_citizenship', // 1 = Yes, 0 = No (integer)
         'citizenship_country', // country of dual citizenship
@@ -50,7 +52,12 @@ class Employee extends Model
         'office_id',
         'tel_no',
     ];
-
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    
     public function office()
     {
         return $this->belongsTo(Office::class);

@@ -3,34 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\DataFeed;
+use App\Models\Employee;
+use App\Models\Office;
+use Inertia\Inertia;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $dataFeed = new DataFeed();
+        // Fetch any necessary data for the dashboard
+        $data = [
+            'totalEmployees' => Employee::count(),
+            'totalDepartments' => Office::count(),
+        ];
 
-        return view('pages/dashboard/dashboard', compact('dataFeed'));
-    }
-
-    /**
-     * Displays the analytics screen
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
-    public function analytics()
-    {
-        return view('pages/dashboard/analytics');
-    }
-
-    /**
-     * Displays the fintech screen
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
-    public function fintech()
-    {
-        return view('pages/dashboard/fintech');
+        return Inertia::render('Admin/Dashboard/Index', [
+            'data' => $data,
+        ]);
     }
 }

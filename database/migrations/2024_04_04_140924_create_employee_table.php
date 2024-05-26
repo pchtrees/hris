@@ -16,7 +16,6 @@ return new class extends Migration {
             $table->string('fname');
             $table->string('mname')->nullable();
             $table->string('lname');
-            $table->string('agency_employee_no');
             $table->string('extension')->nullable();
             $table->date('dob');
             $table->string('place_of_birth');
@@ -42,6 +41,7 @@ return new class extends Migration {
             $table->string('residential_city_municipality')->nullable();
             $table->string('residential_province')->nullable();
             $table->string('permanent_zip_code')->nullable();
+            $table->string('agency_employee_no');
             $table->string('permanent_house_number')->nullable();
             $table->string('permanent_street')->nullable();
             $table->string('permanent_subdivision')->nullable();

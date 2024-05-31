@@ -51,6 +51,7 @@ class Employee extends Model
         'permanent_province', 
         'office_id',
         'tel_no',
+        'is_active'
     ];
     
     public function user()

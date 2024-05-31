@@ -1,24 +1,25 @@
 <template>
-  <div class="flex h-screen">
+  <div class="flex h-screen bg-blue-100 w-screen">
     <Sidebar />
-      
-        <slot name="header"></slot>
-        <Navbar />
-        
-        <main>
-          <slot></slot>
-        </main>
-      </div>
+    <div class="flex-grow flex flex-col">
+      <slot name="header"></slot>
+      <Navbar />
+      <main class="p-4 flex-grow">
+        <slot></slot> 
+      </main>
+    </div>
+  </div>
 </template>
 
 <script>
 import Sidebar from '../components/Sidebar.vue';
 import Navbar from '../components/Navbar.vue';
 
+
 export default {
   components: {
     Sidebar,
-    Navbar
-  }
+    Navbar,
+  },
 };
 </script>

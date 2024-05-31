@@ -50,7 +50,7 @@ return new class extends Migration {
             $table->string('permanent_province')->nullable();
             $table->foreignId('office_id')->constrained('offices')->onDelete('cascade');
             $table->string('tel_no');
-
+            $table->string('is_active')->nullable;
             $table->timestamps();
         });
     }

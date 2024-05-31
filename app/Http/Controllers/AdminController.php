@@ -8,7 +8,7 @@ class AdminController extends Controller
 {
     public function index(): Response
     {
-        return Inertia::render('Admin/App');
+        return Inertia::render('Admin/Dashboard');
     }
 
     public function dashboard(): Response

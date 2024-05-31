@@ -10,9 +10,9 @@
         </div>
         <p class="mt-6 text-lg leading-8 text-gray-600">{{ currentQuote }}</p> 
         <div class="mt-10 flex items-center justify-center gap-x-6">
-          <a :href="route('user.attendance')"
+          <a :href="route('user.employee.pds')"
             class="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-lg hover:shadow-xl hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition duration-300 ease-in-out transform hover:scale-105">
-            Log Attendance <span aria-hidden="true">→</span>
+            Update Personal Information <span aria-hidden="true">→</span>
           </a>
           </div>    
 

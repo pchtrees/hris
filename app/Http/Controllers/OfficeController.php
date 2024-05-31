@@ -8,6 +8,14 @@ use App\Models\Office;
 
 class OfficeController extends Controller
 {
+    public function index()
+    {
+        $offices = Office::all();
+        return Inertia::render('Admin/Office/Index', [
+            'offices' => $offices,
+        ]);
+    }
+    
     public function create()
     {
         return Inertia::render('Admin/Office/Create');

@@ -8,66 +8,52 @@ use App\Models\Plantilla;
 
 class PlantillaController extends Controller
 {
+    public function index()
+    {
+       /* $plantillas = Plantilla::all();
+        return Inertia::render('Plantilla/Index', ['plantillas' => $plantillas]);*/
+        return Inertia::render('Admin/Plantilla/Index',);
+    }
+
     public function create()
     {
-        return Inertia::render('Admin/Plantilla/Create');
+        return Inertia::render('Plantilla/Create');
     }
+
     public function store(Request $request)
     {
         $request->validate([
-            'office_id' => 'required|integer|exists:office,id',
-            'plantilla_item_no' => 'required|integer',
-            'position_id' => 'required|integer|exists:position,id',
-            'employment_status' => 'required|string',
-            'is_active' => 'required|boolean',
+            // Add your validation rules here
         ]);
 
         Plantilla::create($request->all());
 
-        return redirect()->route('admin.dashboard.index')->with('success', 'Plantilla created successfully.');
+        return redirect()->route('plantilla.index')->with('success', 'Plantilla created successfully.');
     }
 
     public function edit($id)
     {
         $plantilla = Plantilla::findOrFail($id);
-        return Inertia::render('Admin/Plantilla/Edit', [
-            'plantilla' => $plantilla
-        ]);
+        return Inertia::render('Plantilla/Edit', ['plantilla' => $plantilla]);
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'office_id' => 'required|integer|exists:office,id',
-            'plantilla_item_no' => 'required|integer',
-            'position_id' => 'required|integer|exists:position,id',
-            'employment_status' => 'required|string',
-            'is_active' => 'required|boolean',
+            // Add your validation rules here
         ]);
 
         $plantilla = Plantilla::findOrFail($id);
         $plantilla->update($request->all());
 
-        return redirect()->route('admin.dashboard.index')->with('success', 'Plantilla updated successfully.');
+        return redirect()->route('plantilla.index')->with('success', 'Plantilla updated successfully.');
     }
 
-    public function assign()
+    public function destroy($id)
     {
-        return Inertia::render('Admin/Plantilla/Assign');
-    }
+        $plantilla = Plantilla::findOrFail($id);
+        $plantilla->delete();
 
-    public function assignPersonnel(Request $request)
-    {
-        // Validate and assign personnel to plantilla
-        $request->validate([
-            'personnel_id' => 'required|integer|exists:personnel,id',
-            'plantilla_id' => 'required|integer|exists:plantilla,id',
-        ]);
-
-        // Assuming you have a pivot table for the assignment
-        $personnel = Personnel::findOrFail($request->personnel_id);
-        $personnel->plantillas()->attach($request->plantilla_id);
-
-        return redirect()->route('admin.dashboard.index')->with('success', 'Personnel assigned to Plantilla successfully.');
+        return redirect()->route('plantilla.index')->with('success', 'Plantilla deleted successfully.');
     }
 }

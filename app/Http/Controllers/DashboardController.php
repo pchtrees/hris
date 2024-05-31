@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\Office;
 use Inertia\Inertia;
+use App\Models\Position;
+use App\Models\LeaveApplication;
 
 class DashboardController extends Controller
 {
@@ -14,7 +16,9 @@ class DashboardController extends Controller
         // Fetch any necessary data for the dashboard
         $data = [
             'totalEmployees' => Employee::count(),
-            'totalDepartments' => Office::count(),
+            'totalOffices' => Office::count(),
+            'totalPosition' => Position::count(),
+            'totalLeaveApplication' => LeaveApplication::count(),
         ];
 
         return Inertia::render('Admin/Dashboard/Index', [

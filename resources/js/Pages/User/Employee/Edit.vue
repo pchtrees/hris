@@ -1,29 +1,34 @@
+<!-- edit.vue -->
 <template>
-  <UserLayout>
-    <div>
-    <h1>Edit Personal Data</h1>
-    <!-- Form to edit employee's information -->
-    <!-- Example: -->
-    <form @submit.prevent="submitForm">
-      <input type="text" v-model="formData.fname" placeholder="First Name">
-      <!-- Other input fields for editing -->
+  <div>
+    <h1>Edit Information</h1>
+    <form @submit.prevent="updateUser">
+      <!-- Add form inputs for editing user information -->
+      <input v-model="user.fname" type="text" placeholder="First Name" />
+      <input v-model="user.lname" type="text" placeholder="Last Name" />
+      <!-- Add other form inputs for user data -->
       <button type="submit">Save</button>
     </form>
-  </UserLayout>
+  </div>
 </template>
 
-<script setup>
-import UserLayout from '../Layout/UserLayout.vue';
-import { ref } from 'vue'; 
-import { Inertia } from '@inertiajs/inertia';
-
-const employee = {
-  fname: 'John',
-  mname: 'Doe',
-  lname: 'Smith',
-};
-
-const submit = () => {
-  Inertia.put(route('user.employee.update'), employee);
+<script>
+export default {
+  data() {
+    return {
+      user: {} // Initialize user object to store edited data
+    };
+  },
+  methods: {
+    updateUser() {
+      // Make an API call to update user data
+      // After successful update, navigate back to pds.vue
+      this.$router.push({ name: 'pds' });
+    }
+  },
+  created() {
+    // Fetch user data from API or store when the component is created
+    // For example, if using Vuex: this.user = this.$store.state.user;
+  }
 };
 </script>

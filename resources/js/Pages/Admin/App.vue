@@ -1,6 +1,7 @@
 <template>
-  <div class="flex h-screen bg-blue-100">
+  <div class="flex h-screen">
     <AdminLayout>
+      
     </AdminLayout>
   </div>
 </template>

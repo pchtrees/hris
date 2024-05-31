@@ -6,28 +6,24 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('nonplantillas', function (Blueprint $table) {
+        Schema::create('non_plantillas', function (Blueprint $table) {
             $table->id();
             $table->string('position_title', 255);
             $table->float('daily_rate');
             $table->foreignId('office_id')->constrained('offices')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users');
-            $table->integer('casual_or_jo');
+            $table->foreignId('position_id')->constrained('positions'); // Add this line if you have a positions table
+            $table->string('employment_status');
             $table->boolean('is_active')->default(true);
             $table->timestamps();
-        });    
+        });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('nonplantillas');
+        Schema::dropIfExists('non_plantillas');
     }
 };
+

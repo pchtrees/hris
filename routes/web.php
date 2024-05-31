@@ -11,6 +11,8 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\PlantillaController;
+use App\Http\Controllers\LeaveController;
+use App\Http\Controllers\PayrollController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,28 +30,76 @@ Route::get('/', function () {
 })->name('home');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-    Route::get('user', [UserController::class, 'index'])->name('user.home');
-    Route::get('user/employee', [UserController::class, 'pds'])->name('user.employee.pds');
-    Route::get('user/employee/edit', [UserController::class, 'edit'])->name('user.employee.edit');
-    Route::put('user/employee', [UserController::class, 'update'])->name('user.employee.update');
+    Route::prefix('user')->name('user.')->group(function () {
+        Route::get('/', [UserController::class, 'index'])->name('home');
+        Route::get('employee', [UserController::class, 'pds'])->name('employee.pds');
+        Route::get('employee/edit', [UserController::class, 'edit'])->name('employee.edit');
+        Route::put('employee', [UserController::class, 'update'])->name('employee.update');
 
+        Route::prefix('leave')->name('leave.')->group(function () {
+            Route::get('leaveapplication', [UserController::class, 'leaveapplication'])->name('leaveapplication');
+            Route::get('privilegesleaves', [UserController::class, 'privilegesleaves'])->name('privilegesleaves');
+            Route::get('leaveindexcard', [UserController::class, 'leaveIndexCard'])->name('leaveindexcard');
+        });
+
+        Route::get('payslip', [UserController::class, 'payslip'])->name('payslip');
+        Route::get('attendance', [UserController::class, 'attendance'])->name('attendance');
+        Route::get('dtr', [UserController::class, 'dtr'])->name('dtr');
+    });
 
     Route::prefix('admin')->name('admin.')->middleware('auth:sanctum')->group(function () {
-        Route::get('app', [AdminController::class, 'index'])->name('app');
+        Route::get('app', [AdminController::class, 'index'])->name('app');    
+        Route::prefix('dashboard')->name('dashboard.')->group(function () {
+            Route::get('index', [DashboardController::class, 'index'])->name('index');
+        });
 
-        Route::get('office/create', [OfficeController::class, 'create'])->name('office.create');
-        Route::post('office/store', [OfficeController::class, 'store'])->name('office.store');
-        Route::get('office/edit/{id}', [OfficeController::class, 'edit'])->name('office.edit');
-        Route::put('office/update/{id}', [OfficeController::class, 'update'])->name('office.update');
+        Route::prefix('employees')->name('employees.')->group(function () {
+            Route::get('index', [EmployeeController::class, 'index'])->name('index');
+            Route::get('create', [EmployeeController::class, 'create'])->name('create');
+            Route::get('{id}', [EmployeeController::class, 'show'])->name('show');
+            Route::post('store', [EmployeeController::class, 'store'])->name('store');
+            Route::get('edit/{id}', [EmployeeController::class, 'edit'])->name('edit');
+            Route::put('update/{id}', [EmployeeController::class, 'update'])->name('update');
+        });
 
-        Route::get('position/create', [PositionController::class, 'create'])->name('position.create');
-        Route::post('position/store', [PositionController::class, 'store'])->name('position.store');
+        Route::prefix('office')->name('office.')->group(function () {
+            Route::get('index', [OfficeController::class, 'index'])->name('index');
+            Route::get('create', [OfficeController::class, 'create'])->name('create');
+            Route::post('store', [OfficeController::class, 'store'])->name('store');
+            Route::get('edit/{id}', [OfficeController::class, 'edit'])->name('edit');
+            Route::put('update/{id}', [OfficeController::class, 'update'])->name('update');
+        });
 
-        Route::get('plantilla/create', [PlantillaController::class, 'create'])->name('plantilla.create');
-        Route::post('plantilla/store', [PlantillaController::class, 'store'])->name('plantilla.store');
-        Route::get('plantilla/edit/{id}', [PlantillaController::class, 'edit'])->name('plantilla.edit');
-        Route::put('plantilla/update/{id}', [PlantillaController::class, 'update'])->name('plantilla.update');
-        Route::get('plantilla/assign', [PlantillaController::class, 'assign'])->name('plantilla.assign');
-        Route::post('plantilla/assignPersonnel', [PlantillaController::class, 'assignPersonnel'])->name('plantilla.assignPersonnel');
+        Route::prefix('position')->name('position.')->group(function () {
+            Route::get('create', [PositionController::class, 'create'])->name('create');
+            Route::post('store', [PositionController::class, 'store'])->name('store');
+        });
+
+        Route::prefix('plantilla')->name('plantilla.')->group(function () {
+            Route::get('index', [PlantillaController::class, 'index'])->name('index');
+            Route::get('create', [PlantillaController::class, 'create'])->name('create');
+            Route::post('store', [PlantillaController::class, 'store'])->name('store');
+            Route::get('edit/{id}', [PlantillaController::class, 'edit'])->name('edit');
+            Route::put('update/{id}', [PlantillaController::class, 'update'])->name('update');
+            Route::get('assign', [PlantillaController::class, 'assign'])->name('assign');
+            Route::post('assignPersonnel', [PlantillaController::class, 'assignPersonnel'])->name('assignPersonnel');
+        });
+
+        Route::prefix('leave')->name('leave.')->group(function () {
+            Route::get('credits', [LeaveController::class, 'index'])->name('credits');
+            Route::post('update-credits', [LeaveController::class, 'updateCredits'])->name('update_credits');
+            Route::get('tardiness-report', [LeaveController::class, 'generateTardinessReport'])->name('tardiness_report');
+            Route::get('leave-index-card', [LeaveController::class, 'viewLeaveIndexCard'])->name('leave_index_card');
+            Route::post('automatic-deduction', [LeaveController::class, 'automaticDeduction'])->name('automatic_deduction');
+            Route::post('automatic-addition', [LeaveController::class, 'automaticAddition'])->name('automatic_addition');
+            Route::get('mandatory-leave-reminder', [LeaveController::class, 'mandatoryLeaveReminder'])->name('mandatory_leave_reminder');
+        });
+
+        Route::prefix('payroll')->name('payroll.')->group(function () {
+            Route::get('dtr', [PayrollController::class, 'index'])->name('dtr');
+            Route::post('deductibles', [PayrollController::class, 'inputDeductibles'])->name('deductibles');
+            Route::get('office-payroll', [PayrollController::class, 'generatePayrollPerOffice'])->name('office_payroll');
+            Route::get('salary-standardization', [PayrollController::class, 'selectSalaryStandardizationTable'])->name('salary_standardization');
+        });
     });
 });

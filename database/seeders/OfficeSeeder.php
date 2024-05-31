@@ -14,11 +14,18 @@ class OfficeSeeder extends Seeder
     public function run(): void
     {
         Office::create([
-            'name' => 'Office A', 
-            'is_active' => true
+            'name' => 'Human Resources',
+            'is_active' => true,
         ]);
+
         Office::create([
-            'name' => 'Office B',
-            'is_active' => true]);
+            'name' => 'Finance',
+            'is_active' => true,
+        ]);
+
+        Office::create([
+            'name' => 'IT Department',
+            'is_active' => true,
+        ]);
     }
 }

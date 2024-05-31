@@ -12,5 +12,8 @@ class Office extends Model
         'name',                 
         'is_active'
     ];
-
+    public function employees()
+    {
+        return $this->hasMany(Employee::class);
+    }
 }

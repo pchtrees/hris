@@ -54,6 +54,7 @@ class EmployeeFactory extends Factory
             'permanent_province' => $this->faker->state,
             'office_id' => \App\Models\Office::factory(),
             'tel_no' => $this->faker->phoneNumber,
+            'is_active' => $this->faker->boolean(80),
         ];
     }
 }

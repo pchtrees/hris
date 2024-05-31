@@ -10,15 +10,11 @@ class PlantillaSeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     *
+     * @return void
      */
-    public function run(): void
+    public function run()
     {
-        Plantilla::create([
-            'office_id' => 1, 
-            'plantilla_item_no' => 'XX-5',
-            'position_id' => 1, 
-            'employment_status' => 1,
-            'is_active' => true,
-        ]);
+        Plantilla::factory()->count(10)->create();
     }
 }

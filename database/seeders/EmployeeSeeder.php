@@ -51,6 +51,7 @@ class EmployeeSeeder extends Seeder
             'permanent_province' => 'State',
             'offices_id' => 2, 
             'tel_no' => '021234567',
+            'is_active' => 1,
         ]);
     }
 }

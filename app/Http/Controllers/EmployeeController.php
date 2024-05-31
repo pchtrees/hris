@@ -5,17 +5,29 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Employee;
+use App\Models\Office;
 use Illuminate\Support\Facades\Auth;
 
 class EmployeeController extends Controller
 {
     public function index()
     {
+        $employees = Employee::with('office')->get();
         $employees = Employee::all();
+        $offices = Office::all(); 
+        $totalEmployees = $employees->count();
+
+        $officeNames = Office::pluck('name', 'id')->all();
+
+    
         return Inertia::render('Admin/Employees/Index', [
-            'employees' => $employees
+            'employees' => $employees,
+            'totalEmployees' => $totalEmployees,
+            'officeNames' => $officeNames, 
         ]);
     }
+    
+
     public function create()
     {
         return Inertia::render('Admin/Employees/Create');
@@ -64,6 +76,7 @@ class EmployeeController extends Controller
             'agency_employee_no' => 'required|string|max:255',
             'office_id' => 'required|exists:offices,id',
             'tel_no' => 'nullable|string|max:15',
+            'is_active' => 'required|boolean'
         ]);
 
         Employee::create($request->all());
@@ -115,6 +128,7 @@ class EmployeeController extends Controller
             'agency_employee_no' => 'required|string|max:255',
             'office_id' => 'required|exists:offices,id',
             'tel_no' => 'nullable|string|max:15',
+            
         ]);
 
         $employee = Employee::findOrFail($id);

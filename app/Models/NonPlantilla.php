@@ -8,23 +8,37 @@ use Illuminate\Database\Eloquent\Model;
 class NonPlantilla extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'position_title',
-        'daily_rate',
-        'offices_id',
-        'user_id',
-        'casual_or_jo',
+        'office_id', 
+        'plantilla_item_no', 
+        'position_id', 
+        'employment_status',
         'is_active',
     ];
-
+    
     public function office()
     {
         return $this->belongsTo(Office::class);
     }
 
-    public function user()
+    public function position()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Position::class);
+    }
+    public static function boot()
+    {
+        parent::boot();
+
+        static::saving(function ($model) {
+            if (!in_array($model->employment_status, [
+                'Casual', 
+                'Coterminous', 
+                'Contractual', 
+                'Job Order', 
+                'Consultancy/Contract of service'
+            ])) {
+                throw new \InvalidArgumentException("Invalid employment status value.");
+            }
+        });
     }
 }

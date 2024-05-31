@@ -10,34 +10,36 @@ use App\Models\Employee;
 
 class UserController extends Controller
 {
-    public function index()
-    {
-            $user = Auth::user();
-            if ($user->usertype == 'user') {
-                return Inertia::render('User/Home');
-            }
-        }
+public function index()
+{
+    $user = Auth::user();
+    if ($user->usertype == 'user') {
+        return Inertia::render('User/Home');
+    } else {
+        return redirect()->route('admin.dashboard.index');
     }
-    public function pds()
-    {
-        $employee = auth()->user()->employee; 
-        return Inertia::render('User/Employee/Pds', [
-            'employee' => $employee
-        ]);
-    }
+}
 
-    public function edit()
-    {
-        $employee = auth()->user()->employee; 
-        return Inertia::render('User/Employee/Edit', [
-            'employee' => $employee
-        ]);
-    }
+public function pds()
+{
+    $employees = auth()->user()->employees; 
+    return Inertia::render('User/Employee/Pds', [
+        'employees' => $employees
+    ]);
+}
+
+public function edit()
+{
+    $employee = Employee::findOrFail($id);
+    return Inertia::render('User/Employee/Edit', [
+        'employees' => $employees
+    ]);
+}
 
 
     public function update(Request $request)
     {
-        $employee = Auth::user()->employee; 
+        $employee = Employee::findOrFail($id);
 
         // Validate and update employee data
         $validatedData = $request->validate([

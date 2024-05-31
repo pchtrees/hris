@@ -12,18 +12,12 @@ class UserController extends Controller
 {
     public function index()
     {
-        if (Auth::check()) {
             $user = Auth::user();
             if ($user->usertype == 'user') {
                 return Inertia::render('User/Home');
-            } else {
-                return redirect()->route('admin.app');
             }
-        } else {
-            return redirect()->route('login');
         }
     }
-
     public function pds()
     {
         $employee = auth()->user()->employee; 
@@ -47,7 +41,6 @@ class UserController extends Controller
 
         // Validate and update employee data
         $validatedData = $request->validate([
-            'user_id' => 'required|exists:users,id',
             'fname' => 'required',
             'mname' => 'required',
             'lname' => 'required',

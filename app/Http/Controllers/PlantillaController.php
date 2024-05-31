@@ -37,7 +37,6 @@ class PlantillaController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Validate and update plantilla
         $request->validate([
             'office_id' => 'required|integer|exists:office,id',
             'plantilla_item_no' => 'required|integer',

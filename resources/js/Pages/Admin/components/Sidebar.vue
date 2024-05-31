@@ -1,6 +1,4 @@
 <template>
-  <div>
-    <div class="flex h-screen">
       <aside class="bg-white text-blue-900 w-64 flex-none">
         <div class="pt-4 p-4 flex items-center justify-center">
           <h1 class="font-bold text-gray-700">HRIS</h1>

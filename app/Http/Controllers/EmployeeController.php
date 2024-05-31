@@ -16,7 +16,6 @@ class EmployeeController extends Controller
             'employees' => $employees
         ]);
     }
-
     public function create()
     {
         return Inertia::render('Admin/Employees/Create');

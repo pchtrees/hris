@@ -9,8 +9,9 @@ class NonPlantilla extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'position_title',
+        'daily_rate',
         'office_id', 
-        'plantilla_item_no', 
         'position_id', 
         'employment_status',
         'is_active',

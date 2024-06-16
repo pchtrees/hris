@@ -1,11 +1,14 @@
 <template>
-  <div class="bg-white rounded-lg shadow-md p-4">
-    <div class="flex items-center justify-between mb-2">
-      <p class="text-lg font-semibold">{{ title }}</p>
-      <svg class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      </svg>
+  <div class="bg-white rounded-lg shadow-md p-4 dark:border-strokedark dark:bg-boxdark flex justify-between items-center">
+    <div>
+      <div class="flex items-center mb-2">
+        <p class="text-lg text-blue-800 font-bold dark:text-white">{{ title }}</p>
+      </div>
+      <p class="text-gray-600 text-lg dark:text-white">{{ value }}</p>
     </div>
-    <p class="text-gray-600 text">{{ value }}</p>
+    <div>
+      <component :is="icon" class="w-8 h-8 text-blue-800 dark:text-white"></component>
+    </div>
   </div>
 </template>
 
@@ -18,6 +21,10 @@ export default {
     },
     value: {
       type: Number,
+      required: true,
+    },
+    icon: {
+      type: Object,
       required: true,
     },
   },

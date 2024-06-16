@@ -6,7 +6,7 @@
   </template>
   
   <script>
-  import UserLayout from './Layout/UserLayout.vue';
+  import UserLayout from '../Layout/UserLayout.vue';
   
   export default {
     components: {

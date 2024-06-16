@@ -14,9 +14,25 @@ class PositionSeeder extends Seeder
     public function run(): void
     {
         Position::create([
-            'title' => 'SR ADMIN. ASST. 1', 
-            'salary_grade' => 10, 
+            'title' => 'SR ADMIN. ASST. I', 
             'is_active' => true]);
-
+        Position::create([
+            'title' => 'SR ADMIN. ASST. II', 
+            'is_active' => true]);
+        Position::create([
+            'title' => 'SR ADMIN. ASST. III', 
+            'is_active' => true]);
+        Position::create([
+            'title' => 'SR ADMIN. ASST. III', 
+            'is_active' => true]);
+        Position::create([
+            'title' => 'dwadwa', 
+            'is_active' => true]);
+        Position::create([
+            'title' => 'fwafga', 
+            'is_active' => true]);
+        Position::create([
+            'title' => 'yfwhaiuas', 
+            'is_active' => true]);
     }
 }

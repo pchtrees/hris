@@ -13,10 +13,8 @@ return new class extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('plantillas_id')->constrained('plantillas')->onDelete('cascade');
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('employee_id')->constrained('employees')->onDelete('cascade');
             $table->date('appointment_date');
-            $table->float('montly_salary');
             $table->boolean('is_active')->default(true);
             $table->string('type'); 
             $table->timestamps();

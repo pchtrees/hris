@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Office;
+use App\Models\User;
+use App\Models\Plantilla;
 
 class Employee extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
         'fname', 
         'mname', 
         'lname', 
@@ -53,7 +54,10 @@ class Employee extends Model
         'tel_no',
         'is_active'
     ];
-    
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -62,6 +66,10 @@ class Employee extends Model
     public function office()
     {
         return $this->belongsTo(Office::class);
+    }
+    public function plantilla()
+    {
+        return $this->hasOne(Plantilla::class);
     }
     
 }

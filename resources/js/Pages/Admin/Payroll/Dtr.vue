@@ -10,23 +10,23 @@
         </button>
       </div>
       </template>
-      <div class="rounded-lg border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default sm:px-7.5 xl:pb-1" >
+      <div class="rounded-lg border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5  xl:pb-1">
       <div class="max-w-full overflow-x-auto">
         <table class="w-full table-auto">
           <thead>
-            <tr class="bg-gray-200 text-left">
-              <th class="min-w-[220px] py-4 px-4 font-medium text-black xl:pl-11">User</th>
-              <th class="min-w-[120px] py-4 px-4 font-medium text-black">Time In (am)</th>
-              <th class="min-w-[120px] py-4 px-4 font-medium text-black">Time Out(am)</th>
-              <th class="min-w-[120px] py-4 px-4 font-medium text-black">Time In(pm)</th>
-              <th class="min-w-[120px] py-4 px-4 font-medium text-black">Time Out(pm)</th>
-              <th class="min-w-[150px] py-4 px-4 font-medium text-black">Action</th>
+            <tr class="bg-gray-2 dark:bg-meta-4 text-left ">
+              <th class="min-w-[220px] py-4 px-4 font-medium text-black xl:pl-11 dark:text-white">User</th>
+              <th class="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white">Time In (am)</th>
+              <th class="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white">Time Out(am)</th>
+              <th class="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white">Time In(pm)</th>
+              <th class="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white">Time Out(pm)</th>
+              <th class="min-w-[150px] py-4 px-4 font-medium text-black dark:text-white">Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="attendance in attendances" :key="attendance.id" class="hover:bg-gray-100">
+            <tr v-for="attendance in attendances" :key="attendance.id" class="hover:bg-gray-100 dark:text-white">
               <td class="py-5 px-4 pl-9 xl:pl-11 text-left">
-                <h5 class="font-medium text-black">{{ attendance.user_id }}</h5>
+                <h5 class="font-medium text-black dark:text-white">{{ attendance.user_id }}</h5>
               </td>
               <td class="py-5 px-4">{{ attendance.am_time_in }}</td>
               <td class="py-5 px-4">{{ attendance.am_time_out }}</td>
@@ -34,7 +34,7 @@
               <td class="py-5 px-4">{{ attendance.am_time_out }}</td>
               <td class="py-5 px-4">
               <div class="flex items-center space-x-3.5">
-                <button class="hover:text-blue-400 text-gray-600">
+                <button class="hover:text-blue-400 text-gray-600 dark:hover:text-primary">
                   <svg
                     class="fill-current"
                     width="18"
@@ -53,12 +53,12 @@
                     />
                   </svg>
                 </button>
-                <button class="hover:text-blue-400 text-gray-600">
+                <button class="hover:text-blue-400 text-gray-600 dark:hover:text-primary">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                   </svg>
                 </button>
-                <button class="hover:text-blue-400 text-gray-600">
+                <button class="hover:text-blue-400 text-gray-600 dark:hover:text-primary">
                   <svg
                     class="fill-current"
                     width="18"

@@ -2,7 +2,7 @@
   <div class="flex h-screen">
     <AdminLayout>
       <template #header>
-        <h1 class="text-2xl font-bold m-4 text-gray-600 dark:text-stroke">Plantillas</h1>
+        <h1 class="text-2xl font-bold m-4 text-gray-600 dark:text-stroke">Offices</h1>
         <div class="flex justify-between m-4 mb-0">
         <Search />
         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold px-2 rounded ">
@@ -15,41 +15,19 @@
         <table class="w-full table-auto">
           <thead>
             <tr class="bg-gray-2 dark:bg-meta-4 text-left ">
-            <th class="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">Employee</th>
-              <th class="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">Offices</th>
-              <th class="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">Item No.</th>
-              <th class="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">Position</th>
-              <th class="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white xl:pl-2">SG&Step</th>
-              <th class="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11 text-md">Date of Original Appointment</th>
-              <th class="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11 text-md">Date of Last Appointment</th>
-              <th class="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white">Status</th>
+              <th class="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">Grade</th>
+              <th class="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white">Step</th>
+              <th class="min-w-[150px] py-4 px-4 font-medium text-black dark:text-white">Value</th>
               <th class="min-w-[150px] py-4 px-4 font-medium text-black dark:text-white">Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="plantilla in plantillas" :key="plantilla.id" class="hover:bg-gray-100 dark:text-white">
-              <td class="py-5 px-4 pl-9 xl:pl-11 text-left">
-                <h5 class="font-medium text-black dark:text-white">{{ plantilla.employee.fname }} {{ plantilla.employee.lname }}</h5>
-              </td>
-              <td class="py-5 px-4 dark:text-white">{{ officeNames[plantilla.office_id] }}</td>
+            <tr v-for="salaryGrades in salaryGrades" :key="salaryGrades.id" class="hover:bg-gray-100 dark:text-white">
               <td class="py-5 px-4 pl-9 xl:pl-11 text-left ">
-                <h5 class="font-medium text-black dark:text-white">{{ plantilla.plantilla_item_no }}</h5>
+                <h5 class="font-medium text-black dark:text-white">{{ salaryGrades.grade }}</h5>
               </td>
-              <td class="py-5 px-4 dark:text-white">{{ positionNames[plantilla.position_id] }}</td>
-              <td class="py-5 px-4 pl-9 xl:pl-2 text-left">
-                <h5 class="font-medium text-black dark:text-white">{{ plantilla.salary_grade.grade }} / {{ plantilla.salary_grade.step }}</h5>
-              </td>
-              <td class="py-5 px-4 pl-9 xl:pl-11 text-left ">
-                <h5 class="font-medium text-black dark:text-white">{{ plantilla.date_of_original_appointment }}</h5>
-              </td>
-              <td class="py-5 px-4 pl-9 xl:pl-11 text-left ">
-                <h5 class="font-medium text-black dark:text-white">{{ plantilla.date_of_last_promotion }}</h5>
-              </td>
-              <td class="py-5 px-4"> 
-                <p class="inline-flex rounded-full bg-opacity-10 py-1 px-3  text-sm font-medium":class="{ 'text-green-700': plantilla.is_active, 'text-red-500': !plantilla.is_active }">
-                {{ plantilla.is_active ? 'Active' : 'Inactive' }}
-              </p>
-              </td>
+              <td class="py-5 px-4 dark:text-white">{{ salaryGrades.step }}</td>
+              <td class="py-5 px-4 dark:text-white">₱ {{ salaryGrades.value }}</td>
               <td class="py-5 px-4">
               <div class="flex items-center space-x-3.5">
                 <button class="hover:text-blue-400 dark:hover:text-primary text-gray-600">
@@ -109,23 +87,6 @@
           </tbody>
         </table>
       </div>
-      <!-- Pagination links -->
-        <div class="flex gap-2 justify-end mt-4">
-          <button
-            class="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded"
-            @click="fetchPrevPage"
-            :disabled="!plantillas.prev_page_url"
-          >
-            Previous
-          </button>
-          <button
-            class="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded"
-            @click="fetchNextPage"
-            :disabled="!plantillas.next_page_url"
-          >
-            Next
-          </button>
-        </div>
       </div>
     </AdminLayout>
   </div>
@@ -141,24 +102,8 @@ export default {
     Search
   },
   props: {
-    plantillas: Array,
-    officeNames: Object,
-    positionNames: Object,
-  },
-  methods: {
-    fetchPrevPage() {
-      if (this.plantillas.prev_page_url) {
-        this.$inertia.get(this.plantillas.prev_page_url);
-      }
-    },
-    fetchNextPage() {
-      if (this.plantillas.next_page_url) {
-        this.$inertia.get(this.plantillas.next_page_url);
-      }
-    },
-  },
-  
+    salaryGrades: Array,
+  }
 };
 
 </script>
-

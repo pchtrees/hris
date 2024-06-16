@@ -12,7 +12,6 @@ return new class extends Migration {
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->string('fname');
             $table->string('mname')->nullable();
             $table->string('lname');
@@ -50,7 +49,7 @@ return new class extends Migration {
             $table->string('permanent_province')->nullable();
             $table->foreignId('office_id')->constrained('offices')->onDelete('cascade');
             $table->string('tel_no');
-            $table->string('is_active')->nullable;
+            $table->string('is_active')->nullable();
             $table->timestamps();
         });
     }

@@ -1,7 +1,7 @@
 <?php
+namespace App\Http\Controllers\personnel;
 
-namespace App\Http\Controllers;
-
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Position;
@@ -10,7 +10,10 @@ class PositionController extends Controller
 {
     public function create()
     {
-        return Inertia::render('Admin/Position/Create');
+        $positions = Position::all(); 
+        return Inertia::render('Admin/Position/Index', [
+            'positions' => $positions
+        ]);
     }
 
     public function store(Request $request)

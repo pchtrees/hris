@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
 use Illuminate\Database\Seeder;
 use App\Models\Office;
 
@@ -19,12 +19,12 @@ class OfficeSeeder extends Seeder
         ]);
 
         Office::create([
-            'name' => 'Finance',
+            'name' => 'Admin',
             'is_active' => true,
         ]);
 
         Office::create([
-            'name' => 'IT Department',
+            'name' => 'ICT',
             'is_active' => true,
         ]);
     }

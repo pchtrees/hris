@@ -1,6 +1,7 @@
 <template>
   <div class="absolute top-0 right-0 p-4">
     <div class="hidden sm:flex sm:items-center sm:ms-6">
+      <DarkModeToggle />
       <div class="hidden lg:flex lg:flex-1 lg:justify-end">
         <!-- Settings Dropdown -->
         <div class="ms-3 relative">
@@ -97,17 +98,21 @@
 <script>
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue'; 
-
-
+import DarkModeToggle from './DarkModeToggle.vue';
 
 export default {
   components: {
     Dropdown,
     DropdownLink,
-    ResponsiveNavLink, 
+    DarkModeToggle,
   },
   
+  data() {
+    return {
+      showingNavigationDropdown: false,
+    };
+  },
+
   methods: {
     logout() {
       this.$inertia.post(this.route('logout'));

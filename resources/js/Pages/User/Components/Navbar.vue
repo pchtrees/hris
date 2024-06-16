@@ -23,38 +23,30 @@
           </a>
           <Dropdown align="left" width="48">
             <template #trigger>
-              <div class="hidden lg:flex lg:gap-x-12">
-              <a href="#" class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 hover:text-blue-700 hover:text-blue-700  focus:outline-none focus:text-blue-700  transition duration-150 ease-in-out text-gray-600">Leave
-              </a>
+              <div class="hidden lg:flex lg:gap-x-12 items-center">
+                <a href="#" class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 hover:text-blue-700 hover:text-blue-700 focus:outline-none focus:text-blue-700 transition duration-150 ease-in-out text-gray-600">
+                  Personnel  
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 ">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                </svg>
+                </a>
               </div>
             </template>
             <template #content>
-              <DropdownLink :href="route('user.leave.leaveapplication')" :active="route().current('user.leave.leaveapplication')">
-                Leave Application
+              <DropdownLink :href="route('user.employee.index')" :active="route().current('user.employee.index')">
+                PDS
               </DropdownLink>
-              <DropdownLink :href="route('user.leave.privilegesleaves')" :active="route().current('user.leave.privilegesleaves')">
-                Privileges and Forced Leaves
+              <DropdownLink :href="route('user.leave.index')" :active="route().current('user.leave.index')">
+                Leave
               </DropdownLink>
-              <DropdownLink :href="route('user.leave.leaveindexcard')" :active="route().current('user.leave.leaveindexcard')">
-                Leave Index Card
+              <DropdownLink :href="route('user.payslip.index')" :active="route().current('user.payslip.index')">
+                Payslip
               </DropdownLink>
             </template>
           </Dropdown>
-          <a href="#" class="text-sm font-semibold leading-6 text-gray-900">
-            <NavLink :href="route('user.payslip')" :active="route().current('user.payslip')">
-              Payslip
-            </NavLink>
-          </a>
-          <a href="#" class="text-sm font-semibold leading-6 text-gray-900">
-            <NavLink :href="route('user.attendance')" :active="route().current('user.attendance')">
-              Attendance
-            </NavLink>
-          </a>
-          <a href="#" class="text-sm font-semibold leading-6 text-gray-900">
-            <NavLink :href="route('user.dtr')" :active="route().current('user.dtr')">
-              DTR
-            </NavLink>
-          </a>
+
+
+        
         </div>
 
         <!--manage user -->

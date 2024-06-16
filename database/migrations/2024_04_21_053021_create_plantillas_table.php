@@ -13,12 +13,11 @@ return new class extends Migration
     {
         Schema::create('plantillas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('employee_id')->nullable()->constrained('employees')->onDelete('cascade');
             $table->foreignId('office_id')->constrained('offices')->onDelete('cascade');
             $table->string('plantilla_item_no', 255);
             $table->foreignId('position_id')->constrained('positions')->onDelete('cascade');
-            $table->integer('salary_grade');
-            $table->float('anual_salary');
-            $table->integer('step');
+            $table->foreignId('salary_grade_id')->constrained('salary_grades')->onDelete('cascade');
             $table->date('date_of_original_appointment');
             $table->date('date_of_last_promotion');
             $table->boolean('is_active')->default(true);

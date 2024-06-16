@@ -11,17 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('salaries', function (Blueprint $table) {
+        Schema::create('salary_grades', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('grade');
+            $table->unsignedInteger('step');
+            $table->decimal('value', 10, 2)->default(0.00);
             $table->timestamps();
         });
-    }
+    }    
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('salaries');
+        Schema::dropIfExists('salary_grades');
     }
 };

@@ -21,11 +21,6 @@
               Home
             </NavLink>
           </a>
-          <a href="#" class="text-sm font-semibold leading-6 text-gray-900">
-            <NavLink :href="route('user.employee.pds')" :active="route().current('user.employee.pds')" >
-              PDS
-            </NavLink>
-          </a>
           <Dropdown align="left" width="48">
             <template #trigger>
               <div class="hidden lg:flex lg:gap-x-12">

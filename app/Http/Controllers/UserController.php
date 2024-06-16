@@ -93,17 +93,6 @@ public function edit()
     {
         return Inertia::render('User/Leave/LeaveApplication');
     }
-    
-    public function privilegesleaves()
-    {
-        return Inertia::render('User/Leave/PrivilegesLeaves');
-    }
-    
-    public function leaveIndexCard()
-    {
-        return Inertia::render('User/Leave/LeaveIndexCard');
-    }
-    
     public function payslip()
     {
         return Inertia::render('User/Payslip');

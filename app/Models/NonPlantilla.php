@@ -25,20 +25,5 @@ class NonPlantilla extends Model
     {
         return $this->belongsTo(Position::class);
     }
-    public static function boot()
-    {
-        parent::boot();
 
-        static::saving(function ($model) {
-            if (!in_array($model->employment_status, [
-                'Casual', 
-                'Coterminous', 
-                'Contractual', 
-                'Job Order', 
-                'Consultancy/Contract of service'
-            ])) {
-                throw new \InvalidArgumentException("Invalid employment status value.");
-            }
-        });
-    }
 }

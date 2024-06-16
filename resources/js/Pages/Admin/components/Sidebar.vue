@@ -1,9 +1,7 @@
-
 <template>
   <aside class="bg-white text-blue-900 w-64 flex-none">
     <div class="pt-4 p-4 flex items-center justify-center">
       <h1 class="font-bold text-gray-700">HRIS</h1>
-      <hr class="bg-blue-300 border">
     </div>
     <nav class="mt-2">
       <ul class="space-y-2">
@@ -11,7 +9,6 @@
       </ul>
     </nav>
   </aside>
-  
 </template>
 
 <script>
@@ -46,9 +43,6 @@ export default {
           { label: 'Attendance Logs', route: 'admin.payroll.dtr' }
          ],
         },
-        
-        
-
       ],
     };
   },

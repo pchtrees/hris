@@ -14,11 +14,10 @@ class AppointmentSeeder extends Seeder
     public function run(): void
     {
         Appointment::create([
-            'plantillas_id' => 1,
-            'user_id' => 1, 
+            'employee_id' => 1,
             'appointment_date' => '2024-05-01', 
             'is_active' => true,
-            'type' => 'Regular', 
+            'type' => 'Permanent', 
         ]);
     }
 }

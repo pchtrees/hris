@@ -10,7 +10,6 @@ class Position extends Model
     use HasFactory;
     protected $fillable = [
         'title', 
-        'salary_grade',  
         'is_active'
     ];
 }

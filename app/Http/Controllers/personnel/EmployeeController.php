@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\personnel;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Employee;
 use App\Models\Office;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 
 class EmployeeController extends Controller
 {
-    public function index()
-    {
+    public function index(){
         $employees = Employee::with('office')->get();
         $employees = Employee::all();
         $offices = Office::all(); 
@@ -26,15 +26,14 @@ class EmployeeController extends Controller
             'officeNames' => $officeNames, 
         ]);
     }
-    
+    public function create(){
+        $offices = Office::all()->pluck('name', 'id');
 
-    public function create()
-    {
-        return Inertia::render('Admin/Employees/Create');
+        return Inertia::render('Admin/Employees/Create', [
+            'officeNames' => $offices,
+        ]);
     }
-    public function store(Request $request)
-    {
-        // Validate and store employee
+    public function store(Request $request){
         $validatedData = $request->validate([
             'user_id' => 'required|exists:users,id',
             'fname' => 'required|string|max:255',
@@ -83,8 +82,7 @@ class EmployeeController extends Controller
 
         return redirect()->route('admin.employees.index')->with('success', 'Employee created successfully.');
     }
-    public function update(Request $request)
-    {
+    public function update(Request $request, $id){
         $employee = Auth::user()->employee;
 
         $validatedData = $request->validate([
@@ -127,14 +125,35 @@ class EmployeeController extends Controller
             'permanent_province' => 'required|string|max:255',
             'agency_employee_no' => 'required|string|max:255',
             'office_id' => 'required|exists:offices,id',
-            'tel_no' => 'nullable|string|max:15',
-            
+            'tel_no' => 'nullable|string|max:15', 
+            'is_active' => 'required|boolean'
         ]);
 
         $employee = Employee::findOrFail($id);
         $employee->update($request->all());
 
-        return redirect()->route('admin.employees.pds')->with('success', 'Employee updated successfully.');
+        return redirect()->route('admin.employees.index')->with('success', 'Employee updated successfully.');
+    }
+    public function show($id){
+        $employee = Employee::findOrFail($id);
+        return Inertia::render('Employees/Show', [
+            'employee' => $employee,
+        ]);
+    }
+    public function edit($id){
+        $employee = Employee::findOrFail($id);
+        $offices = Office::all()->pluck('name', 'id');
+
+        return Inertia::render('Admin/Employees/Edit', [
+            'employee' => $employee,
+            'officeNames' => $offices,
+        ]);
+    }
+    public function destroy($id){
+        $employee = Employee::findOrFail($id);
+        $employee->delete();
+    
+        return redirect()->route('admin.employees.index')->with('success', 'Employee deleted successfully.');
     }
 }
 

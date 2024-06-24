@@ -10,11 +10,10 @@ return new class extends Migration
     {
         Schema::create('non_plantillas', function (Blueprint $table) {
             $table->id();
-            $table->string('position_title', 255);
+            $table->string('position_title');
             $table->float('daily_rate');
             $table->foreignId('office_id')->constrained('offices')->onDelete('cascade');
-            $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('position_id')->constrained('positions'); // Add this line if you have a positions table
+            $table->foreignId('position_id')->constrained('positions');
             $table->string('employment_status');
             $table->boolean('is_active')->default(true);
             $table->timestamps();

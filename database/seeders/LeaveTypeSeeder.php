@@ -15,7 +15,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        LeaveType::factory()->count(2)->create();
+        LeaveType::create([
+            'leave_name' => 'Sick Leave',
+            'desc' => 'Leave taken due to illness or medical reasons',
+        ]);
+
+        LeaveType::create([
+            'leave_name' => 'Vacation Leave',
+            'desc' => 'Leave taken for rest and relaxation purposes',
+        ]);
     }
 }
 

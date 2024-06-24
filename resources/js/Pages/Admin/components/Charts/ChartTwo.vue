@@ -83,14 +83,14 @@ const apexOptions = {
   >
     <div class="mb-4 justify-between gap-4 sm:flex">
       <div>
-        <h4 class="text-xl font-bold text-black  p-2">Profit this week</h4>
+        <h4 class="text-xl font-bold text-black dark:text-white p-2">Chart Two</h4>
       </div>
       <div>
         <div class="relative z-20 inline-block">
           <select
             name="#"
             id="#"
-            class="relative z-20 inline-flex appearance-none bg-transparent py-1 pl-3 pr-8 text-sm font-medium outline-none"
+            class="relative z-20 inline-flex appearance-none bg-transparent py-1 pl-3 pr-8 text-sm font-medium outline-none dark:text-white"
           >
             <option value="">This Week</option>
             <option value="">Last Week</option>

@@ -9,8 +9,9 @@ class NonPlantilla extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'position_title',
+        'daily_rate',
         'office_id', 
-        'plantilla_item_no', 
         'position_id', 
         'employment_status',
         'is_active',
@@ -25,20 +26,5 @@ class NonPlantilla extends Model
     {
         return $this->belongsTo(Position::class);
     }
-    public static function boot()
-    {
-        parent::boot();
 
-        static::saving(function ($model) {
-            if (!in_array($model->employment_status, [
-                'Casual', 
-                'Coterminous', 
-                'Contractual', 
-                'Job Order', 
-                'Consultancy/Contract of service'
-            ])) {
-                throw new \InvalidArgumentException("Invalid employment status value.");
-            }
-        });
-    }
 }

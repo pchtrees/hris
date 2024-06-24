@@ -23,7 +23,7 @@ public function index()
 public function pds()
 {
     $employees = auth()->user()->employees; 
-    return Inertia::render('User/Employee/Pds', [
+    return Inertia::render('User/Employee/Index', [
         'employees' => $employees
     ]);
 }
@@ -86,36 +86,15 @@ public function edit()
 
         $employee->update($validatedData);
 
-        return redirect()->route('user.employee.pds')->with('success', 'Employee information updated successfully.');
+        return redirect()->route('user.employee.index')->with('success', 'Employee information updated successfully.');
     }
 
-    public function leaveapplication()
+    public function leaveIndex()
     {
-        return Inertia::render('User/Leave/LeaveApplication');
+        return Inertia::render('User/Leave/Index');
     }
-    
-    public function privilegesleaves()
+    public function payslipIndex()
     {
-        return Inertia::render('User/Leave/PrivilegesLeaves');
-    }
-    
-    public function leaveIndexCard()
-    {
-        return Inertia::render('User/Leave/LeaveIndexCard');
-    }
-    
-    public function payslip()
-    {
-        return Inertia::render('User/Payslip');
-    }
-    
-    public function attendance()
-    {
-        return Inertia::render('User/Attendance');
-    }
-    
-    public function dtr()
-    {
-        return Inertia::render('User/Dtr');
+        return Inertia::render('User/Payslip/Index');
     }
 }

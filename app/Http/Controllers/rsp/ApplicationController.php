@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\rsp;
 
 use App\Models\rsp\Application;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ApplicationController extends Controller
 {

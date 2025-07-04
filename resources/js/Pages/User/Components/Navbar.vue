@@ -20,33 +20,16 @@
             <NavLink :href="route('user.home')" :active="route().current('user.home')">
               Home
             </NavLink>
-          </a>
-          <Dropdown align="left" width="48">
-            <template #trigger>
-              <div class="hidden lg:flex lg:gap-x-12 items-center">
-                <a href="#" class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 hover:text-blue-700 hover:text-blue-700 focus:outline-none focus:text-blue-700 transition duration-150 ease-in-out text-gray-600">
-                  Personnel  
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 ">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                </svg>
-                </a>
-              </div>
-            </template>
-            <template #content>
-              <DropdownLink :href="route('user.employee.index')" :active="route().current('user.employee.index')">
+              <NavLink :href="route('user.employee.index')" :active="route().current('user.employee.index')">
                 PDS
-              </DropdownLink>
-              <DropdownLink :href="route('user.leave.index')" :active="route().current('user.leave.index')">
+              </NavLink>
+              <NavLink :href="route('user.leave.index')" :active="route().current('user.leave.index')">
                 Leave
-              </DropdownLink>
-              <DropdownLink :href="route('user.payslip.index')" :active="route().current('user.payslip.index')">
+              </NavLink>
+              <NavLink :href="route('user.payslip.index')" :active="route().current('user.payslip.index')">
                 Payslip
-              </DropdownLink>
-            </template>
-          </Dropdown>
-
-
-        
+              </NavLink>
+          </a>
         </div>
 
         <!--manage user -->
